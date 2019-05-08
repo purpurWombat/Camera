@@ -40,7 +40,7 @@
 
                     <EditText
                         android:id="@+id/resultEt"
-                        android:hint="Click + buttion to add image"
+                        android:hint=""
                         android:autoLink="all"
                         android:background="@null"
                         android:padding="5dp"
