@@ -1,10 +1,13 @@
 package com.example.oerkaptan.camera;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -102,8 +105,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void pickCamera() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "NewPic");
+
+        values.put(MediaStore.Images.Media.DESCRIPTION, "IMage to text");
+
+        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        Intent cameraInten = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraInten.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
+    }
+
+
+
+    private void requestStoragePermission() {
+        ActivityCompat.requestPermissions(this, storagePermission, STORAGE_REQUEST_CODE);
+
+    }
+
+    private boolean checkStoragePermission() {
+        boolean result = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+
+        return result;
+    }
+
     private void requestCameraPermission() {
-        ActivityCompat
+        ActivityCompat.requestPermissions(this, cameraPermission, CAMERA_REQUEST_CODE);
     }
 
     private boolean checkCameraPermission() {
