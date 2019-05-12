@@ -64,10 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     //menu
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private void showImageImportdialog() {
     String[] items = {"Camera", "Gallery"};
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle("Select Image");
+        dialog.setTitle("Bild wählen");
         dialog.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {

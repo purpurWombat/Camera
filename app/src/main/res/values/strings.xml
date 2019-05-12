@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Camera</string>
+    <string name="app_name">Camera OCR</string>
+    <string name="ergebnis">Ergebnis:</string>
+    <string name="bildvorschau">Bildvorschau:</string>
+    <string name="bild_w_hlen">Bild wählen</string>
+    <string name="einstellungen">Einstellungen</string>
 </resources>

@@ -30,7 +30,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="ergebnis"
+                        android:text="@string/ergebnis"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp"
                         android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:text="Bild vorschau"
+                        android:text="@string/bildvorschau"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20sp"
                         android:layout_width="match_parent"
