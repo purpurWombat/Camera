@@ -1,6 +1,8 @@
 package com.example.oerkaptan.camera;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,10 +23,11 @@ import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText mResultEt;
     ImageView mPreviewIv;
+    Button buttonCopy;
 
     private static final int CAMERA_REQUEST_CODE = 200;
     private static final int STORAGE_REQUEST_CODE = 400;
@@ -55,17 +59,26 @@ public class MainActivity extends AppCompatActivity {
 
         mResultEt = findViewById(R.id.resultEt);
         mPreviewIv = findViewById(R.id.imageIv);
+        buttonCopy = findViewById(R.id.buttonCopy);
 
         //camera permission
         cameraPermission = new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-
+        buttonCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboardManager = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("" ,mResultEt.getText().toString());
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(getApplicationContext(), "Text kopiert", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
-    //menu
 
+    //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -81,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.settings){
             Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -113,11 +125,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         dialog.create().show();
-
     }
 
     private void pickGallery() {
-
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
@@ -140,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void requestStoragePermission() {
         ActivityCompat.requestPermissions(this, storagePermission, STORAGE_REQUEST_CODE);
-
     }
 
     private boolean checkStoragePermission() {
@@ -177,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
                    } else {
                        Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
                    }
-
                }
                break;
 
@@ -191,12 +199,9 @@ public class MainActivity extends AppCompatActivity {
                    } else {
                        Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
                    }
-
                }
                break;
-
        }
-
     }
 
 
@@ -210,13 +215,10 @@ public class MainActivity extends AppCompatActivity {
             if (requestCode == IMAGE_PICK_GALLERY_CODE){
                 CropImage.activity(data.getData()).setGuidelines(CropImageView.Guidelines.ON)
                         .start(this);
-
             }
             if (requestCode == IMAGE_PICK_CAMERA_CODE){
                 CropImage.activity(image_uri).setGuidelines(CropImageView.Guidelines.ON)
                         .start(this);
-
-
             }
         }
 
@@ -244,24 +246,17 @@ public class MainActivity extends AppCompatActivity {
                         TextBlock myItem = items.valueAt(i);
                         stringBuilder.append(myItem.getValue());
                         stringBuilder.append("\n");
-
                     }
                     // txt in editor
                     mResultEt.setText(stringBuilder.toString());
-
                 }
             }
 
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-
                 Exception error = result.getError();
                 Toast.makeText(this, ""+error, Toast.LENGTH_SHORT).show();
             }
-
-
         }
-
-
     }
 }
 
