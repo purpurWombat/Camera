@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showImageImportdialog() {
-        String[] items = {"Camera", "Gallery"};
+        String[] items = {"Kamera", "Gallerie"};
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Bild wählen");
         dialog.setItems(items, new DialogInterface.OnClickListener() {
