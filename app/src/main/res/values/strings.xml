@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Camera OCR</string>
-    <string name="ergebnis">Ergebnis:</string>
+    <string name="ergebnis">Dein Text:</string>
     <string name="bildvorschau">Bildvorschau:</string>
     <string name="bild_w_hlen">Bild wählen</string>
     <string name="einstellungen">Einstellungen</string>

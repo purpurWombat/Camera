@@ -22,7 +22,8 @@
                 app:cardBackgroundColor="#fff"
                 app:cardUseCompatPadding="true"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                android:minHeight="150dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <!--gescannter text kommt hier hin-->
+                    <!--Gescannter Text wird hier angezeigt-->
 
                     <EditText
                         android:id="@+id/resultEt"
@@ -48,7 +49,8 @@
                         android:textIsSelectable="true"
                         android:textColor="#000"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:minHeight="150dp"/>
 
                     <Button
                         android:id="@+id/buttonCopy"
@@ -66,7 +68,8 @@
                 app:cardBackgroundColor="#fff"
                 app:cardUseCompatPadding="true"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                android:minHeight="150dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
