@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    // permission result
+    //Abfrage ob Permissions erteilt sind
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
