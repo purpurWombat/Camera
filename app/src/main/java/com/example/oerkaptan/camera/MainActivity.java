@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         mPreviewIv = findViewById(R.id.imageIv);
         buttonCopy = findViewById(R.id.buttonCopy);
 
-        //camera permission
+        //Kamera und Gallerie Permissions
         cameraPermission = new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "NewPic");
 
-        values.put(MediaStore.Images.Media.DESCRIPTION, "IMage to text");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Image to text");
 
         image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                    if (cameraAccepted && writeStorageAccepted){
                        pickCamera();
                    } else {
-                       Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(this, "Zugriff verweigert", Toast.LENGTH_SHORT).show();
                    }
                }
                break;
@@ -197,17 +197,14 @@ public class MainActivity extends AppCompatActivity {
                    if (writeStorageAccepted){
                        pickGallery();
                    } else {
-                       Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show();
+                       Toast.makeText(this, "Zugriff verweigert", Toast.LENGTH_SHORT).show();
                    }
                }
                break;
        }
     }
 
-
-    // bild auswahlt handeln
-
-
+    //Handling der Bildauswahl
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
@@ -222,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //get cropped img
+        //Gecropptes Image übergeben
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK){
@@ -241,13 +238,14 @@ public class MainActivity extends AppCompatActivity {
                     Frame frame = new  Frame.Builder().setBitmap(bitmap).build();
                     SparseArray<TextBlock> items = recognizer.detect(frame);
                     StringBuilder stringBuilder = new StringBuilder();
-                    // txt von stringbuilder holen bis kein text mehr da ist
+
+                    //Text vom StringBulder holen, bis kein Text mehr vorhanden ist
                     for (int i = 0; i<items.size(); i++){
                         TextBlock myItem = items.valueAt(i);
                         stringBuilder.append(myItem.getValue());
                         stringBuilder.append("\n");
                     }
-                    // txt in editor
+                    //Text im EditText anzeigen
                     mResultEt.setText(stringBuilder.toString());
                 }
             }
@@ -259,16 +257,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//https://www.youtube.com/watch?v=nc_Zmkf16kM
